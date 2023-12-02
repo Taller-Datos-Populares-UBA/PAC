@@ -1,9 +1,87 @@
-diccionario_productos={'🥦🥕 Bolsón de verduras verdes agroecológicas (5 kg aprox.) con variedades de estación - Productorxs de Escobar - ': 'bolson_verde',
+lista_terminos_presentes_en_nombres = {'Marca temporal':'marca_temporal',
+                                       'Dirección de correo':'email',
+                                       'Nombre y apellido':'nombre',
+                                       'Bolsón de verduras verdes':'bolson_verdes',
+                                       'Bolsón de pesadas':'bolson_pesadas',
+                                       'bolsón de verdes + pesadas + maple':'combo_verdes_pesadas_maple',
+                                       'bolsón de verdes + bolsón de pesadas':'combo_verdes_pesadas',
+                                       'Peras':'pera',
+                                       'Huevos':'huevo',
+                                       'Bananas':'banana',
+                                       'Paltas':'palta',
+                                       'Berenjenas':'berenjena',
+                                       'Cebollas':'cebolla',
+                                       'Limones':'limon',
+                                       'Papa blanca':'papa_blanca',
+                                       'Manzana roja':'manzana_roja',
+                                       'Zapallo':'zapallo',
+                                       'Mandarina':'mandarina',
+                                       'Naranja de':'naranja',
+                                       'Pomelo rosado':'pomelo_rosado',
+                                       'Batata morada':'batata_morada',
+                                       'Repollo blanco':'repollo_blanco',
+                                       'Zapallo anco':'zapallo_anco',
+                                       'Zanahoria':'zanahoria',
+                                       'Bolsón de frutas':'bolson_frutas',
+                                       'Ajo':'ajo',
+                                       'Lechuga morada':'lechuga_morada',
+                                       'Lechuga francesa':'lechuga_francesa',
+                                       'Naranja sanguínea':'naranja_sanguinea',
+                                       'Tomate de':'tomate',
+                                       'Tomate cherry':'tomate_cherry',
+                                       'Manzana verde':'manzana_verde',
+                                       'Frutilla':'frutilla',
+                                       'Morrón verde':'morron_verde',
+                                       '¿Dónde':'casa_popular',
+                                       #acá empieza lo que agregué del diccionario_productos
+                                       'Yerba mate' : 'yerba',
+                                       'Miel':'miel',
+                                       'Tomates perita':'tomate_perita',
+                                       'Cebollas moradas': 'cebolla_morada',
+                                       'Mandioca':'mandioca',
+                                       'Harina de trigo integral' : 'harina_trigo_integral',
+                                       'Tapas para empanadas' : 'tapas_empanadas_12',
+                                       'Orégano' : 'oregano',
+                                       'Zuchini ': 'zuchini',
+                                       'Manzanas' : 'manzana',
+                                       'Pascualina':'pascualina',
+                                       'Polenta':'polenta',
+                                       'Detergente' : 'detergente',
+                                       'Granola' : 'granola',
+                                       'Zapallo kabutia' : 'zapallo_kabutia',
+                                       'Chimichurri' : 'chimichurri',
+                                       'Jabón líquido' : 'jabon_liquido',
+                                       'Tintura' : 'tintura',
+                                       'Tomate triturado' : 'tomate_triturado',
+                                       'Mermelada de Duraznos' :'mermelada_durazno',
+                                       'Jengibre' : 'jengibre',
+                                       'Grisines' : 'grisines',
+                                       'Aceitunas Verdes' : 'aceituna_verde',
+                                       'Azúcar mascabo' : 'azucar_mascabo',
+                                       'Arroz integral' : 'arroz_integral',
+                                       'Poroto de soja' : 'poroto_soja',
+                                       'Poroto alubia': 'poroto_alubia',
+                                       'Poroto colorado' : 'poroto_colorado',
+                                       'Poroto negro' : 'poroto_negro',
+                                       'Mate Cocido' : 'mate_cocido',
+                                       'Te negro':'te_negro',
+                                       'Queso pategrás' : 'queso_pategras',
+                                       'Chorizo colorado' :'chorizo_colorado'
+
+
+
+
+                                       }
+lista_de_valores_originales = []
+for nombre_clave in lista_terminos_presentes_en_nombres:
+  lista_de_valores_originales.append(lista_terminos_presentes_en_nombres[nombre_clave])
+
+diccionario_productos={'🥦🥕 Bolsón de verduras verdes agroecológicas (5 kg aprox.) con variedades de estación - Productorxs de Escobar - ': 'bolson_verdes',
 '🥔🧅 Bolsón de pesadas agroecológicas (3kg aprox.) - ' :'bolson_pesadas',
 '🥔🥦🥚Agrocombo: bolsón de verdes + pesadas + maple de huevos  '  : 'combo_verdes_pesadas_maple',
-'🍐Peras de Neuquén-1 kg - ' : 'peras',
+'🍐Peras de Neuquén-1 kg - ' : 'pera',
 '🥚🥚  Huevos de campo producidos por 3H - Tres Arroyos (Bs As) - Docena - ' : 'docena_huevos',
-'🍌Bananas de Jujuy- 1kg - ' : 'bananas',
+'🍌Bananas de Jujuy- 1kg - ' : 'banana',
 'Yerba mate "Las Tunas" 1kg - ': 'yerba_las_tunas',
 'Miel pura "Monte Adentro" - 500g - ' : 'miel',
 '🥚 Huevos de campo producidos por 3H - Tres Arroyos (Bs As) - Media docena- ' : 'media_docena_huevos',
@@ -11,7 +89,7 @@ diccionario_productos={'🥦🥕 Bolsón de verduras verdes agroecológicas (5 k
 '🥑Paltas silvestres de Misiones - 1kg- ': 'palta',
 '🍆Berenjenas de Mendoza- 1kg - ': 'berenjena',
 '🥕Zanahorias de Mendoza -1kg- ' : 'zanahoria',
-'🧅 Cebollas moradas de Mendoza - 1kg - ': 'cebolla_moradas',
+'🧅 Cebollas moradas de Mendoza - 1kg - ': 'cebolla_morada',
 '🧄 Ajos biodinámicos de Mendoza - por unidad -':'ajo',
 '🍋Limones de Tucumán - 1kg - ' : 'limon',
 'Mandiocas de Misiones - 1kg- ':'mandioca',
@@ -51,23 +129,23 @@ diccionario_productos={'🥦🥕 Bolsón de verduras verdes agroecológicas (5 k
 'Chorizo colorado "Torgelon 58" Unidad 200gr - ' :'chorizo_colorado'}
 
 diccionario_2={
-    '🍐Peras de Neuquén - 1 kg - ': 'peras', #ya estaba
+    '🍐Peras de Neuquén - 1 kg - ': 'pera', #ya estaba
 '🧅 Cebollas de Mendoza - 1kg - ': 'cebolla', #ya esta
 '🧄 Ajos de Mendoza - por unidad - ': 'ajo', #ya esta
 '🥔 Papa blanca de Mendoza - 1kg - ':'papa_mendoza',
 'Grisines de malteado "Grissinopoli" 180g - ':'grisines', #ya está
-'Aceitunas verdes rellenas con morrón "Cuyo Natural" 370gr - ':'aceitunas',
+'Aceitunas verdes rellenas con morrón "Cuyo Natural" 370gr - ':'aceituna',
 'Mate Cocido Económico "Tucanguá" 25 saquitos - ':'mate_cocido', #ya está
 'Te negro económico "Tucanguá" 25 saquitos - ':'te_negro', #ya esta
-'Zapallito verde de Mendoza - 1kg - ': 'zapallitos',
+'Zapallito verde de Mendoza - 1kg - ': 'zapallito',
 '🥒 Pepino de Mendoza - 1kg - ': 'pepino',
 'Batata morada de Misiones - 1kg - ': 'batata',
 'Cúrcuma de Misiones - 100gr - ': 'curcuma',
 'Quinoto de Tucumán - 1kg - ': 'quinoto',
 '🥝 Kiwi de Buenos Aires - 1kg - ': 'kiwi',
 '🍍 Ananá de Misiones - por unidad (1,3kg aprox.) - ': 'ananá',
-'Yerba Mate "Yerbal Viejo" 500g -': 'yerba_viejo',
-'Yerba Mate "Orembaé" 1kg - ': 'yerba_orembae',
+'Yerba Mate "Yerbal Viejo" 500g -': 'yerba',
+'Yerba Mate "Orembaé" 1kg - ': 'yerba',
 'Queso Tybo Barra feteado "Master Cheese" bandeja 150g - ':'queso_tybo',
 'Aceite de oliva extra virgen orgánico "San Nicolas" 500cc - ': 'aceite_oliva',
 'Arvejas orgánicas "Salve la Tierra" 500g - ' : 'arvejas',
@@ -77,7 +155,7 @@ diccionario_2={
 'Lechuga capuchina - por unidad (aprox. 300g) - ': 'lechuga_capuchina',
 'Lechuga manteca - por unidad (aprox. 300g) - ': 'lechuga_manteca',
 'Repollo blanco - por unidad (aprox. 900g) - ': 'repollo_blanco',
-    'Yerba Mate "Yerbal Viejo" 500g - ':'yerba_viejo',
+    'Yerba Mate "Yerbal Viejo" 500g - ':'yerba',
     '🧄 Ajos de Mendoza - por unidad -':'ajo'}
 
 diccionario_3 ={'🍋Limones del Delta (Bs. As.) - 1kg - ': 'limon',
@@ -96,7 +174,7 @@ diccionario_3 ={'🍋Limones del Delta (Bs. As.) - 1kg - ': 'limon',
 diccionario_4={
   '🥔🥦🥚 Agrocombo: bolsón de verdes + pesadas + maple de huevos  ':'combo_verdes_pesadas_maple',
  '🥔🥦 Combo bolsón de verdes + bolsón de pesadas - ':'combo_verdes_pesadas',
- '🧅 Cebollas de Coop. Lejardinere - 1kg - ': 'cebollas',
+ '🧅 Cebollas de Coop. Lejardinere - 1kg - ': 'cebolla',
  '🧄 Ajos de Mendoza - por unidad -':'ajo',
  'Zapallo kabutia de Coop. Lejardinere - 1kg- ':'zapallo_kabutia',
  '🟠 ¡PROMO! Naranjas del Delta (Bs. As.) - 1kg- ': 'naranja',
@@ -104,12 +182,12 @@ diccionario_4={
  'Queso pategrás natural -300 grs "Doña Cuchara" - ': 'queso_pategras',
  'Batata Arapey - 1kg - ':'batata',
  '🥝 ¡PROMO! Kiwi de Buenos Aires - 1kg - ': 'kiwi',
- 'Yerba Mate "Yerbal Viejo" 500g - ': 'yerba_viejo',
+ 'Yerba Mate "Yerbal Viejo" 500g - ': 'yerba',
  'Aceite de oliva "Zampal" extra virgen 500cc  - ': 'aceite_oliva',
  'Zapallo anco de Mendoza - 1kg - ': 'zapallo_anco',
  'Aceite de girasol puro "El Cortijo" 900ml  - ': 'aceite_girasol',
  '🥕 Zanahoria del Colectivo Agro - 1kg - ': 'zanahoria',
- 'Aceitunas Verdes "Zampal" 500g - ': 'aceitunas'
+ 'Aceitunas Verdes "Zampal" 500g - ': 'aceituna_verde'
 }
 
 diccionario_5={'🥑Paltas silvestres de Misiones - 1kg - ':'palta',
@@ -117,8 +195,8 @@ diccionario_5={'🥑Paltas silvestres de Misiones - 1kg - ':'palta',
  '🍊 Mandarina de Entre Ríos - 1 kg - ': 'mandarina',
  '🟠 Naranja de Entre Ríos - 1kg- ':'naranja',
  'Batata morada - 1kg - ': 'batata_morada',
- 'Yerba Mate "Grapia Milenaria" 500g - ': 'yerba_grapia_500g',
- 'Yerba Mate "Grapia Milenaria" - 1kg - ':'yerba_grapia_1000g',
+ 'Yerba Mate "Grapia Milenaria" 500g - ': 'yerba',
+ 'Yerba Mate "Grapia Milenaria" - 1kg - ':'yerba',
  'Lechuga morada de Escobar - por unidad (aprox. 300g) - ': 'lechuga_morada',
  '🥕 Zanahoria de Mendoza - 1kg - ': 'zanahoria',
  '🍊 🍎 Bolsón de frutas 3kg (1kg naranja, 1kg mandarina, 0,5kgs manzana, 0,5kgs pera) - ': 'bolson_frutas',
@@ -195,3 +273,26 @@ diccionario_9={'🍎 Manzana roja de Neuquén - 1kg - ':'manzana',
  'Chorizo colorado "Torgelon 58" - por unidad (200gr) - ': 'chorizo_colorado',
  'Miel pura "Monte adentro" - 1kg - ': 'miel',
  'Orégano agroecológico "Crece desde el pie" - 50g - ': 'oregano'}
+
+# Esta función pasa las claves del diccionario a una lista (Todo con el objetivo de comparar con el diccionario original y ver que valores faltaban)
+def claves_diccionario_a_listas(diccionario:dict)->list:
+  lista_de_valores_del_diccionario = []
+  for clave in diccionario:
+    lista_de_valores_del_diccionario.append(diccionario[clave])
+  return lista_de_valores_del_diccionario
+
+def valores_faltantes_en_original(diccionario_original:dict, diccionario_a_chequear:dict)-> list:
+    lista_con_valores_a_chequear = claves_diccionario_a_listas(diccionario_a_chequear)
+    lista_con_valores_faltantes = claves_diccionario_a_listas(diccionario_a_chequear).copy()
+    lista_de_valores_originales = claves_diccionario_a_listas(diccionario_original)
+    
+    for i in range(len(lista_de_valores_originales)):
+      for j in range(len(lista_con_valores_a_chequear)):
+        if lista_de_valores_originales[i] == lista_con_valores_a_chequear[j]:
+          lista_con_valores_faltantes.remove(lista_con_valores_a_chequear[j])
+    
+    return lista_con_valores_faltantes
+
+print(valores_faltantes_en_original(lista_terminos_presentes_en_nombres,diccionario_2))
+
+# En el diccionario original falta agregar a partir del diccionario tres
