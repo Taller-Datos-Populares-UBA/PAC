@@ -8,16 +8,16 @@ def agregar_columna_id_0(df_limpiar):
   df_limpiar['id']=0
   return df_limpiar
 
-def actualizar_lista_emails(df_a_limpiar, lista_emails, inicio):
+def actualizar_lista_emails(df_a_limpiar, lista_emails):#, inicio):
   for email in df_a_limpiar['Dirección de correo electrónico']:
     if email not in lista_emails:
       lista_emails.append(email)
   return lista_emails
 
-def trabajar_dataframe(df_a_limpiar, lista_emails, inicio):
+def trabajar_dataframe(df_a_limpiar, lista_emails):#, inicio):
   agregar_columna_id_0(df_a_limpiar)
   sacar_nan_del_email(df_a_limpiar)
-  lista_emails=actualizar_lista_emails(df_a_limpiar, lista_emails, inicio)
+  lista_emails=actualizar_lista_emails(df_a_limpiar, lista_emails)#, inicio)
   return lista_emails
 
 def actualizar_dataframe(df_a_limpiar, lista_emails):

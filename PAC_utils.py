@@ -3,22 +3,16 @@ from datetime import datetime
 from datetime import date
 import pandas as pd
 import numpy as np
+import anonimizacion
 import tablas_Yami
 
-def transformar_df(df_original):
-  df = df_original.copy()
-  #genero el diccionario para unificar nombres
-  nombres_nuevos_dict = diccionario_nombres_a_unificar(df)
-  # filtro columnas y las renombro
-  df = filtrar_renombrar_columnas(df,nombres_nuevos_dict)
-  #cambio fecha a string para continuar operando
-  df['marca_temporal'] = df['marca_temporal'].apply(cambiar_fecha_a_string)
-  # agrego fecha_entrega
-  df = agregar_fecha_entrega(df)
-  # unifico atributo casa_popular
-  df['casa_popular'] = df['casa_popular'].apply(parsear_casa_popular)
-
-  return df
+def diccionario_nombres_a_unificar(df):
+  dict_nombres_nuevos = {}
+  for columna in df.columns.values:
+    for termino_presente in lista_terminos_presentes_en_nombres.keys():
+      if columna.find(termino_presente) >= 0: #es decir, si está #termino_presente.is_in(columna):
+        dict_nombres_nuevos[columna] = lista_terminos_presentes_en_nombres[termino_presente]
+  return dict_nombres_nuevos
 
 def filtrar_renombrar_columnas(df_original,nombres_nuevos_dict):
   df = df_original.copy()
@@ -133,10 +127,34 @@ lista_terminos_presentes_en_nombres = {'Marca temporal':'marca_temporal',
                                        'Morrón verde':'morron_verde',
                                        '¿Dónde':'casa_popular'}
 
-def diccionario_nombres_a_unificar(df):
-  dict_nombres_nuevos = {}
-  for columna in df.columns.values:
-    for termino_presente in lista_terminos_presentes_en_nombres.keys():
-      if columna.find(termino_presente) >= 0: #es decir, si está #termino_presente.is_in(columna):
-        dict_nombres_nuevos[columna] = lista_terminos_presentes_en_nombres[termino_presente]
-  return dict_nombres_nuevos
+
+#hay que limpiar del excel las filas que ya no tienen productos. Fecha: 6/4/2024
+
+def tomar_pedidos_de_tabla(df_original,cantidad_pedidos):
+  df_pedidos = df_original.drop(df_original.index[cantidad_pedidos:],inplace=False)
+  return df_pedidos
+
+#tomar_pedidos_del_excel funciona
+
+def transformar_df(df_original,cantidad_pedidos):
+  df = tomar_pedidos_de_tabla(df_original,cantidad_pedidos)
+  #anonimizo
+  lista_emails = []
+  lista_emails = anonimizacion.trabajar_dataframe(df,lista_emails)
+  df = anonimizacion.actualizar_dataframe(df,lista_emails) 
+  #genero el diccionario para unificar nombres
+  nombres_nuevos_dict = diccionario_nombres_a_unificar(df)
+  # filtro columnas y las renombro
+  df = filtrar_renombrar_columnas(df,nombres_nuevos_dict)
+  #cambio fecha a string para continuar operando
+  df['marca_temporal'] = df['marca_temporal'].apply(cambiar_fecha_a_string)
+  # agrego fecha_entrega
+  df = agregar_fecha_entrega(df)
+  # unifico atributo casa_popular
+  df['casa_popular'] = df['casa_popular'].apply(parsear_casa_popular)
+
+  return df
+
+#transformar_df funciona, falta agregarle la anonimización. Fecha: 6/4/2024
+df_original = pd.read_excel('1 - Entrega 20_5_2023.xlsx')
+print(transformar_df(df_original,64))
