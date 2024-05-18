@@ -4,14 +4,37 @@ from datetime import date
 import pandas as pd
 import numpy as np
 import anonimizacion
-import tablas_Yami
+import funcion_diccionarios
+from dict_productos_por_fecha import lista_terminos_presentes_en_nombres, diccionario_productos, diccionario_2, diccionario_3,diccionario_4,diccionario_5,diccionario_6,diccionario_7,diccionario_8,diccionario_9
+#import tablas_Yami
+
+#Nos ponemos a unificar todos los diccionarios de productos. Fecha: 4/5/2024
+
+lista_diccionarios_por_fecha = [diccionario_productos,
+                                diccionario_2,
+                                diccionario_3,
+                                diccionario_4,
+                                diccionario_5,
+                                diccionario_6,
+                                diccionario_7,
+                                diccionario_8,
+                                diccionario_9]
+
+unificacion_diccionarios_productos = {}
+unificacion_diccionarios_productos = lista_terminos_presentes_en_nombres
+for lista_productos in lista_diccionarios_por_fecha:
+  unificacion_diccionarios_productos = funcion_diccionarios.agregar_a_diccionario_original(unificacion_diccionarios_productos,lista_productos)
+
+print(unificacion_diccionarios_productos)
+
+#unificar los diccionarios funcionó. Fecha: 4/5/2024
 
 def diccionario_nombres_a_unificar(df):
   dict_nombres_nuevos = {}
   for columna in df.columns.values:
-    for termino_presente in lista_terminos_presentes_en_nombres.keys():
+    for termino_presente in unificacion_diccionarios_productos.keys():
       if columna.find(termino_presente) >= 0: #es decir, si está #termino_presente.is_in(columna):
-        dict_nombres_nuevos[columna] = lista_terminos_presentes_en_nombres[termino_presente]
+        dict_nombres_nuevos[columna] = unificacion_diccionarios_productos[termino_presente]
   return dict_nombres_nuevos
 
 def filtrar_renombrar_columnas(df_original,nombres_nuevos_dict):
@@ -28,7 +51,6 @@ def cambiar_fecha_a_string(fecha_completa):
 
 def cambiar_string_a_fecha(string):
   fecha = datetime.strptime(string,'%Y-%m-%d')
-  print(fecha)
   return fecha
 
 def agregar_fecha_entrega(df_original):
@@ -91,43 +113,6 @@ def aplicar_filtros(df, clientes=None, fecha=None, fecha_inicial=None, fecha_fin
 
 #empezamos a cambiar los nombres que incluyen precios por nombres genéricos
 
-lista_terminos_presentes_en_nombres = {'Marca temporal':'marca_temporal',
-                                       'Dirección de correo':'email',
-                                       'Nombre y apellido':'nombre',
-                                       'Bolsón de verduras verdes':'bolson_verdes',
-                                       'Bolsón de pesadas':'bolson_pesadas',
-                                       'bolsón de verdes + pesadas + maple':'combo_verdes_pesadas_maple',
-                                       'bolsón de verdes + bolsón de pesadas':'combo_verdes_pesadas',
-                                       'Peras':'pera',
-                                       'Huevos':'huevo',
-                                       'Bananas':'banana',
-                                       'Paltas':'palta',
-                                       'Berenjenas':'berenjena',
-                                       'Cebollas':'cebolla',
-                                       'Limones':'limon',
-                                       'Papa blanca':'papa_blanca',
-                                       'Manzana roja':'manzana_roja',
-                                       'Zapallo':'zapallo',
-                                       'Mandarina':'mandarina',
-                                       'Naranja de':'naranja',
-                                       'Pomelo rosado':'pomelo_rosado',
-                                       'Batata morada':'batata_morada',
-                                       'Repollo blanco':'repollo_blanco',
-                                       'Zapallo anco':'zapallo_anco',
-                                       'Zanahoria':'zanahoria',
-                                       'Bolsón de frutas':'bolson_frutas',
-                                       'Ajo':'ajo',
-                                       'Lechuga morada':'lechuga_morada',
-                                       'Lechuga francesa':'lechuga_francesa',
-                                       'Naranja sanguínea':'naranja_sanguinea',
-                                       'Tomate de':'tomate',
-                                       'Tomate cherry':'tomate_cherry',
-                                       'Manzana verde':'manzana_verde',
-                                       'Frutilla':'frutilla',
-                                       'Morrón verde':'morron_verde',
-                                       '¿Dónde':'casa_popular'}
-
-
 #hay que limpiar del excel las filas que ya no tienen productos. Fecha: 6/4/2024
 
 def tomar_pedidos_de_tabla(df_original,cantidad_pedidos):
@@ -138,10 +123,6 @@ def tomar_pedidos_de_tabla(df_original,cantidad_pedidos):
 
 def transformar_df(df_original,cantidad_pedidos):
   df = tomar_pedidos_de_tabla(df_original,cantidad_pedidos)
-  #anonimizo
-  lista_emails = []
-  lista_emails = anonimizacion.trabajar_dataframe(df,lista_emails)
-  df = anonimizacion.actualizar_dataframe(df,lista_emails) 
   #genero el diccionario para unificar nombres
   nombres_nuevos_dict = diccionario_nombres_a_unificar(df)
   # filtro columnas y las renombro
@@ -152,9 +133,23 @@ def transformar_df(df_original,cantidad_pedidos):
   df = agregar_fecha_entrega(df)
   # unifico atributo casa_popular
   df['casa_popular'] = df['casa_popular'].apply(parsear_casa_popular)
-
+  #cambiar Nans por ceros en los productos
+  df.fillna(value=0,inplace=True)
+  #anonimizo
+  lista_emails = []
+  lista_emails = anonimizacion.trabajar_dataframe(df,lista_emails)
+  df = anonimizacion.actualizar_dataframe(df,lista_emails)
   return df
 
 #transformar_df funciona, falta agregarle la anonimización. Fecha: 6/4/2024
-df_original = pd.read_excel('1 - Entrega 20_5_2023.xlsx')
-print(transformar_df(df_original,64))
+#Nans cambiados exitosamente por ceros. Fecha: 4/5/2024
+
+#df_original = pd.read_excel('1 - Entrega 20_5_2023.xlsx')
+#print(transformar_df(df_original,64).columns)
+#anonimización completada. Fecha: 4/5/2024
+
+#Es posible que haya que corregir algún otro nombre de producto para que no sea falsamente encontrado como parte de otros nombres
+#(como pasó con 'sal'). Falta chequear qué ocurre con productos del mismo tipo pero distintas marcas que se ofrecen en una MISMA FECHA
+#Fecha: 4/5/2024
+
+

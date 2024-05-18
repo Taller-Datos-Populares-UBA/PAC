@@ -205,8 +205,8 @@ diccionario_5={'🥑Paltas silvestres de Misiones - 1kg - ':'palta',
  'Jengibre de Misiones - 100g - ': 'jenjibre',
  'Naranja sanguínea de Tucumán - 1kg - ': 'naranja',
  'Polenta "Del Campo" - 500g - ': 'polenta',
- 'Poroto adzuki orgánico "Salve la Tierra" - 500g - ': 'poroto_adzuki',
- 'Sal del Himalaya (sal rosa) - 200g - ': 'sal',
+ 'Poroto adzuki orgánico "Salve la Tierra" - 500lada_durazno, Mermelada de Duraznosg - ': 'poroto_adzuki',
+ 'Sal del Himalaya (sal rosa) - 200g - ': 'sal_himalaya',
  'Chorizo colorado "Torgelón 58" - 200gr - ':'chorizo_colorado',
  'Romero "Taku" - 25grs - ': 'romero',
  'Laurel en hojas "Taku" - 25grs - ': 'laurel'
@@ -273,26 +273,3 @@ diccionario_9={'🍎 Manzana roja de Neuquén - 1kg - ':'manzana',
  'Chorizo colorado "Torgelon 58" - por unidad (200gr) - ': 'chorizo_colorado',
  'Miel pura "Monte adentro" - 1kg - ': 'miel',
  'Orégano agroecológico "Crece desde el pie" - 50g - ': 'oregano'}
-
-# Esta función pasa las claves del diccionario a una lista (Todo con el objetivo de comparar con el diccionario original y ver que valores faltaban)
-def claves_diccionario_a_listas(diccionario:dict)->list:
-  lista_de_valores_del_diccionario = []
-  for clave in diccionario:
-    lista_de_valores_del_diccionario.append(diccionario[clave])
-  return lista_de_valores_del_diccionario
-
-def valores_faltantes_en_original(diccionario_original:dict, diccionario_a_chequear:dict)-> list:
-    lista_con_valores_a_chequear = claves_diccionario_a_listas(diccionario_a_chequear)
-    lista_con_valores_faltantes = claves_diccionario_a_listas(diccionario_a_chequear).copy()
-    lista_de_valores_originales = claves_diccionario_a_listas(diccionario_original)
-    
-    for i in range(len(lista_de_valores_originales)):
-      for j in range(len(lista_con_valores_a_chequear)):
-        if lista_de_valores_originales[i] == lista_con_valores_a_chequear[j]:
-          lista_con_valores_faltantes.remove(lista_con_valores_a_chequear[j])
-    
-    return lista_con_valores_faltantes
-
-print(valores_faltantes_en_original(lista_terminos_presentes_en_nombres,diccionario_2))
-
-# En el diccionario original falta agregar a partir del diccionario tres

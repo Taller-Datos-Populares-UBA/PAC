@@ -1,7 +1,7 @@
 import pandas as pd
 
 def sacar_nan_del_email(df_a_limpiar):
-  df_a_limpiar=df_a_limpiar.dropna(subset='Dirección de correo electrónico')
+  df_a_limpiar=df_a_limpiar.dropna(subset=['email'])
   return  df_a_limpiar
 
 def agregar_columna_id_0(df_limpiar):
@@ -9,7 +9,7 @@ def agregar_columna_id_0(df_limpiar):
   return df_limpiar
 
 def actualizar_lista_emails(df_a_limpiar, lista_emails):#, inicio):
-  for email in df_a_limpiar['Dirección de correo electrónico']:
+  for email in df_a_limpiar['email']:
     if email not in lista_emails:
       lista_emails.append(email)
   return lista_emails
@@ -21,15 +21,17 @@ def trabajar_dataframe(df_a_limpiar, lista_emails):#, inicio):
   return lista_emails
 
 def actualizar_dataframe(df_a_limpiar, lista_emails):
-  nro=df_a_limpiar['Dirección de correo electrónico'].count()
+  nro=df_a_limpiar['email'].count()
   count=1
   for email in lista_emails:
     i=0
     for i in range(nro):
-      filtro=df_a_limpiar.loc[i, 'Dirección de correo electrónico'] == email
+      filtro=df_a_limpiar.loc[i, 'email'] == email
       if filtro:
         df_a_limpiar.loc[i, 'id']=count
     count=count+1
+  #completar la anonimización
+  df_a_limpiar = df_a_limpiar.drop(['email','nombre'],axis=1)
   return df_a_limpiar
 
 #Crear una lista de emails vacia
