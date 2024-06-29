@@ -1,6 +1,7 @@
 lista_terminos_presentes_en_nombres = {'Marca temporal':'marca_temporal',
                                        'Dirección de correo':'email',
                                        'Nombre y apellido':'nombre',
+                                       'fecha_entrega':'fecha_entrega',
                                        'Bolsón de verduras verdes':'bolson_verdes',
                                        'Bolsón de pesadas':'bolson_pesadas',
                                        'bolsón de verdes + pesadas + maple':'combo_verdes_pesadas_maple',

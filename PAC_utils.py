@@ -6,7 +6,7 @@ import numpy as np
 import anonimizacion
 import funcion_diccionarios
 from dict_productos_por_fecha import lista_terminos_presentes_en_nombres, diccionario_productos, diccionario_2, diccionario_3,diccionario_4,diccionario_5,diccionario_6,diccionario_7,diccionario_8,diccionario_9
-#import tablas_Yami
+import tablas_Yami
 
 #Nos ponemos a unificar todos los diccionarios de productos. Fecha: 4/5/2024
 
@@ -25,7 +25,7 @@ unificacion_diccionarios_productos = lista_terminos_presentes_en_nombres
 for lista_productos in lista_diccionarios_por_fecha:
   unificacion_diccionarios_productos = funcion_diccionarios.agregar_a_diccionario_original(unificacion_diccionarios_productos,lista_productos)
 
-print(unificacion_diccionarios_productos)
+#print(unificacion_diccionarios_productos)
 
 #unificar los diccionarios funcionó. Fecha: 4/5/2024
 
@@ -152,4 +152,30 @@ def transformar_df(df_original,cantidad_pedidos):
 #(como pasó con 'sal'). Falta chequear qué ocurre con productos del mismo tipo pero distintas marcas que se ofrecen en una MISMA FECHA
 #Fecha: 4/5/2024
 
+
+#######################
+
+#Nos ponemos a convertir los nombres de los productos en la tabla de precios en los nombres simples que ya tenemos
+
+def unificar_nombres_productos_en_tabla_precios(tabla_precios,diccionario_nombres_nuevos):
+  tabla_precios = tabla_precios.rename(columns=diccionario_nombres_nuevos)
+  return tabla_precios
+
+def crear_tabla_precios_nombres_nuevos(df_pedido,fecha_pedido):
+  tabla_precios_fecha = tablas_Yami.armar_tabla_precios_una_fecha(df_pedido,fecha_pedido)
+  nombres_nuevos_dict = diccionario_nombres_a_unificar(tabla_precios_fecha)
+  tabla_precios_nombres_nuevos = unificar_nombres_productos_en_tabla_precios(tabla_precios_fecha,nombres_nuevos_dict)
+  return tabla_precios_nombres_nuevos
+
+def construir_lista_tablas_precios(lista_entregas):
+  dfs_entregas = tablas_Yami.crear_lista_dataframes_entregas(lista_entregas)
+  lista_fechas_feas = tablas_Yami.de_nombre_archivo_a_fecha_fea(lista_entregas)
+  lista_fechas_lindas = tablas_Yami.dar_formato_fechas(lista_fechas_feas)
+  lista_tablas_precios = []
+  for k in range(len(lista_entregas)):
+    lista_tablas_precios.append(crear_tabla_precios_nombres_nuevos(dfs_entregas[k],lista_fechas_lindas[k]))
+  return lista_tablas_precios
+
+lista_entregas = ['1 - Entrega 20_5_2023.xlsx','2 - Entrega 3_6_2023.xlsx']
+print(construir_lista_tablas_precios(lista_entregas)[0].columns)
 

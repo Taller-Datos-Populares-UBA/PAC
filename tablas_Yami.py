@@ -73,3 +73,21 @@ def hacer_lista_nombres(lista_precios_fecha_nueva,N):
   for i in range(1, N):
     lista_nombres.append(lista_precios_fecha_nueva[i][0])
   return lista_nombres
+
+#tenemos que armar la tabla de precios con los nombres simplificados (y que sean iguales a los de las tablas de pedidos transformadas)
+#fecha: 15/6/2024
+
+def armar_tabla_precios_una_fecha(df_pedido,fecha_pedido):
+  lista_encabezados = df_pedido.columns.to_list()
+  lista_fecha = parsear_precios(lista_encabezados,fecha_pedido)
+  nombres_columnas = ['fecha_entrega']
+  valores = [fecha_pedido]
+  for producto in lista_fecha[1:]:
+    nombres_columnas.append(producto[0])
+    valores.append(producto[1])
+  tabla_precios_fecha = pd.DataFrame([valores],columns=nombres_columnas)
+  return tabla_precios_fecha
+
+#ahora queremos convertir los nombres complicados de los productos a los simples. Fecha: 15/6/2024
+
+
