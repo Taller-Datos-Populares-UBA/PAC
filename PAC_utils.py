@@ -176,6 +176,21 @@ def construir_lista_tablas_precios(lista_entregas):
     lista_tablas_precios.append(crear_tabla_precios_nombres_nuevos(dfs_entregas[k],lista_fechas_lindas[k]))
   return lista_tablas_precios
 
-lista_entregas = ['1 - Entrega 20_5_2023.xlsx','2 - Entrega 3_6_2023.xlsx']
-print(construir_lista_tablas_precios(lista_entregas)[0].columns)
+def unificar_tablas_precios(tabla_precios_acumulada,tabla_precios_nueva):
+  tabla_unificada = pd.concat([tabla_precios_acumulada,tabla_precios_nueva],ignore_index=True)
+  return tabla_unificada
 
+
+lista_entregas = ['1 - Entrega 20_5_2023.xlsx','2 - Entrega 3_6_2023.xlsx']
+lista_tablas_precios = construir_lista_tablas_precios(lista_entregas)
+#print(unificar_tablas_precios(lista_tablas_precios[0],lista_tablas_precios[1]))
+print(lista_tablas_precios[0].columns)
+#print(lista_tablas_precios[1].columns)
+
+"""
+No se puede unificar las tablas porque hay nombres de columnas duplicados. Observamos que pasa esto con 'yerba' y con 'huevo'. 
+Esto se debe a que no sabemos distinguir los tipos de un mismo producto. El diccionario de nombres nuevos es diferente al de términos
+presentes en nombres, y este último sólo toma productos de la primera entrega. Por eso tampoco se cambia los nombres de productos
+de entregas siguientes a la primera.
+Fecha: 29/6/2024
+"""
