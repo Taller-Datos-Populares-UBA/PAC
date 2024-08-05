@@ -115,14 +115,20 @@ def aplicar_filtros(df, clientes=None, fecha=None, fecha_inicial=None, fecha_fin
 
 #hay que limpiar del excel las filas que ya no tienen productos. Fecha: 6/4/2024
 
-def tomar_pedidos_de_tabla(df_original,cantidad_pedidos):
+##esto cuenta el numero de pedidos por entrega en base a los mails
+def contar_pedidos (df_entrega):
+    cant_pedidos = df_entrega.iloc[:,1].count() #cuenta los pedidos por cantidad de mails
+    return cant_pedidos
+
+def tomar_pedidos_de_tabla(df_original):
+  cantidad_pedidos = contar_pedidos(df_original)
   df_pedidos = df_original.drop(df_original.index[cantidad_pedidos:],inplace=False)
   return df_pedidos
 
 #tomar_pedidos_del_excel funciona
 
-def transformar_df(df_original,cantidad_pedidos):
-  df = tomar_pedidos_de_tabla(df_original,cantidad_pedidos)
+def transformar_df(df_original):
+  df = tomar_pedidos_de_tabla(df_original)
   #genero el diccionario para unificar nombres
   nombres_nuevos_dict = diccionario_nombres_a_unificar(df)
   # filtro columnas y las renombro
@@ -145,7 +151,7 @@ def transformar_df(df_original,cantidad_pedidos):
 #Nans cambiados exitosamente por ceros. Fecha: 4/5/2024
 
 #df_original = pd.read_excel('1 - Entrega 20_5_2023.xlsx')
-#print(transformar_df(df_original,64).columns)
+#print(transformar_df(df_original).columns)
 #anonimización completada. Fecha: 4/5/2024
 
 #Es posible que haya que corregir algún otro nombre de producto para que no sea falsamente encontrado como parte de otros nombres
@@ -156,36 +162,6 @@ def transformar_df(df_original,cantidad_pedidos):
 #######################
 
 #Nos ponemos a convertir los nombres de los productos en la tabla de precios en los nombres simples que ya tenemos
-
-def unificar_nombres_productos_en_tabla_precios(tabla_precios,diccionario_nombres_nuevos):
-  tabla_precios = tabla_precios.rename(columns=diccionario_nombres_nuevos)
-  return tabla_precios
-
-def crear_tabla_precios_nombres_nuevos(df_pedido,fecha_pedido):
-  tabla_precios_fecha = tablas_Yami.armar_tabla_precios_una_fecha(df_pedido,fecha_pedido)
-  nombres_nuevos_dict = diccionario_nombres_a_unificar(tabla_precios_fecha)
-  tabla_precios_nombres_nuevos = unificar_nombres_productos_en_tabla_precios(tabla_precios_fecha,nombres_nuevos_dict)
-  return tabla_precios_nombres_nuevos
-
-def construir_lista_tablas_precios(lista_entregas):
-  dfs_entregas = tablas_Yami.crear_lista_dataframes_entregas(lista_entregas)
-  lista_fechas_feas = tablas_Yami.de_nombre_archivo_a_fecha_fea(lista_entregas)
-  lista_fechas_lindas = tablas_Yami.dar_formato_fechas(lista_fechas_feas)
-  lista_tablas_precios = []
-  for k in range(len(lista_entregas)):
-    lista_tablas_precios.append(crear_tabla_precios_nombres_nuevos(dfs_entregas[k],lista_fechas_lindas[k]))
-  return lista_tablas_precios
-
-def unificar_tablas_precios(tabla_precios_acumulada,tabla_precios_nueva):
-  tabla_unificada = pd.concat([tabla_precios_acumulada,tabla_precios_nueva],ignore_index=True)
-  return tabla_unificada
-
-
-lista_entregas = ['1 - Entrega 20_5_2023.xlsx','2 - Entrega 3_6_2023.xlsx']
-lista_tablas_precios = construir_lista_tablas_precios(lista_entregas)
-#print(unificar_tablas_precios(lista_tablas_precios[0],lista_tablas_precios[1]))
-print(lista_tablas_precios[0].columns)
-#print(lista_tablas_precios[1].columns)
 
 """
 No se puede unificar las tablas porque hay nombres de columnas duplicados. Observamos que pasa esto con 'yerba' y con 'huevo'. 
