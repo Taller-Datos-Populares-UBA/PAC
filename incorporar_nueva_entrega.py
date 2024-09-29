@@ -43,6 +43,7 @@ df_pedidos_acumulados = incorporar_nueva_lista_pedidos(df_primer_pedido,'2 - Ent
 print(df_pedidos_acumulados)
 """
 
+"""
 lista_entregas = ['2 - Entrega 3_6_2023.xlsx',
                   '3 - Entrega 17_6_2023.xlsx',
                   '4 - Entrega 1_7_2023.xlsx',
@@ -60,7 +61,7 @@ tabla_precios_acumulada.fillna(0.0,inplace=True)
 
 tabla_precios_acumulada.to_excel('tabla_precios_acumulada.xlsx',index=False)
 
-"""
+
 lista_entregas = ['2 - Entrega 3_6_2023.xlsx',
                   '3 - Entrega 17_6_2023.xlsx',
                   '4 - Entrega 1_7_2023.xlsx',
@@ -70,7 +71,7 @@ lista_entregas = ['2 - Entrega 3_6_2023.xlsx',
                   '8 - Entrega 26_8_2023.xlsx',
                   '9 - Entrega 9_9_2023.xlsx']
 
-"""
+
 primer_pedido = pd.read_excel('1 - Entrega 20_5_2023.xlsx')
 df_pedidos_acumulados = pac.transformar_df(primer_pedido)
 for entrega in lista_entregas:
@@ -82,3 +83,4 @@ df_pedidos_acumulados.to_excel('pedidos_acumulados.xlsx',index=False)
 #cuarto_pedido = pd.read_excel('4 - Entrega 1_7_2023.xlsx')
 #df_cuarto_pedido = pac.transformar_df(cuarto_pedido)
 #print(df_cuarto_pedido.columns.duplicated())
+"""
