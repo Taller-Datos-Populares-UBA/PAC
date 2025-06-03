@@ -93,7 +93,7 @@ def aplicar_filtros(df, clientes=None, fecha=None, fecha_inicial=None, fecha_fin
     df_filtrado = df.copy()
 
     if clientes:
-      df_filtrado = df_filtrado[df_filtrado['id'].isin(clientes)]
+      df_filtrado = df_filtrado[df_filtrado['id'] in clientes]
 
     if fecha:
       if fecha_inicial or fecha_final:
