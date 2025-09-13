@@ -27,9 +27,9 @@ def unificar_tablas_precios(tabla_precios_acumulada,tabla_precios_nueva):
   tabla_unificada = pd.concat([tabla_precios_acumulada,tabla_precios_nueva],ignore_index=True)
   return tabla_unificada
 
-def incorporar_nueva_lista_pedidos(df_pedidos_acumulados,excel_pedidos_nuevos):
+def incorporar_nueva_lista_pedidos(df_pedidos_acumulados,excel_pedidos_nuevos,lista_emails):
   df_nuevo_pedido = pd.read_excel(excel_pedidos_nuevos)
-  df_agregar = pac.transformar_df(df_nuevo_pedido)
+  df_agregar = pac.transformar_df(df_nuevo_pedido,lista_emails)
   pedidos_unificados = pd.concat([df_pedidos_acumulados,df_agregar],ignore_index=True)
   return pedidos_unificados
 

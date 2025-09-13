@@ -127,7 +127,7 @@ def tomar_pedidos_de_tabla(df_original):
 
 #tomar_pedidos_del_excel funciona
 
-def transformar_df(df_original):
+def transformar_df(df_original,lista_emails):
   df = tomar_pedidos_de_tabla(df_original)
   #genero el diccionario para unificar nombres
   nombres_nuevos_dict = diccionario_nombres_a_unificar(df)
@@ -142,7 +142,7 @@ def transformar_df(df_original):
   #cambiar Nans por ceros en los productos
   df.fillna(value=0,inplace=True)
   #anonimizo
-  lista_emails = []
+  #lista_emails = [] ESTA LINEA CAUSABA PONER MAL LOS ID
   lista_emails = anonimizacion.trabajar_dataframe(df,lista_emails)
   bool_anonimizar = False #poner false si queremos mantener los mails y nombres
   df = anonimizacion.actualizar_dataframe(df,lista_emails,bool_anonimizar)
